@@ -1,34 +1,9 @@
-import { useState } from "react";
-import EvaluationTable from "../components/EvaluTable/EvaluTable";
-import EvaluationForm from "../components/EvaluForm/EvaluForm";
-import { EvaluationData, Evaluation } from "../utils/types";
-
-const initialData: EvaluationData = {
-  CheckPoints: { 1: [8, 9, 7], 2: [7, 8, 8] },
-  ChallengeSprint: { 1: [9, 8], 2: [8, 7] },
-  GlobalSolution: { 1: [10], 2: [9] },
-};
 
 export default function Home() {
-  const [evaluations, setEvaluations] = useState<EvaluationData>(initialData);
-
-  const handleAddEvaluation = (newEvaluation: Evaluation) => {
-    const { category, semester, scores } = newEvaluation;
-    setEvaluations((prev) => ({
-      ...prev,
-      [category]: {
-        ...prev[category as keyof EvaluationData],
-        [semester]: scores,
-      },
-    }));
-  };
-
   return (
-    <div>
-      <h1>Academic Evaluations</h1>
-      <EvaluationTable evaluations={evaluations} />
-      <h2>Add New Evaluation</h2>
-      <EvaluationForm onSubmit={handleAddEvaluation} />
+    <div className="text-center text-4xl mt-32 mb-0 mt-0 text-white bg-gradient-to-r from-my-gradient-100 to-my-gradient-50 p-52">
+      <h1 className="font-medium">Olá!</h1>
+      <h2>Seja bem-vindo.</h2>
     </div>
   );
 }
