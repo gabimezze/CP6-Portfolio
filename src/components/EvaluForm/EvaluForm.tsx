@@ -1,23 +1,34 @@
 import { useState } from "react";
-import { EvaluationCategory, Evaluation } from "../../utils/types";
+import { EvaluationCategory, Subject, Evaluation } from "../../utils/types";
 
 interface EvaluationFormProps {
   onSubmit: (newEvaluation: Evaluation) => void;
 }
 
 const EvaluationForm: React.FC<EvaluationFormProps> = ({ onSubmit }) => {
+  const [subject, setSubject] = useState<Subject>("Matemática");
   const [category, setCategory] = useState<EvaluationCategory>("CheckPoints");
   const [semester, setSemester] = useState<1 | 2>(1);
   const [scores, setScores] = useState<number[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ category, semester, scores });
+    onSubmit({ subject, category, semester, scores });
     setScores([]); // Reset the scores
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <label>Subject</label>
+      <select value={subject} onChange={(e) => setSubject(e.target.value as Subject)}>
+        <option value="IA e Chatbot">Artificial Intelligence & Chatbot</option>
+        <option value="Database">Building Relational Database</option>
+        <option value="Python">Computacional Thinking Using Python</option>
+        <option value="Java">Domain Driven Design Using Java</option>
+        <option value="Front End">Front-End Design Engineering</option>
+        <option value="Software e Business">Software Engineering and Business Model</option>
+      </select>
+
       <label>Category</label>
       <select value={category} onChange={(e) => setCategory(e.target.value as EvaluationCategory)}>
         <option value="CheckPoints">CheckPoints</option>

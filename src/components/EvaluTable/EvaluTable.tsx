@@ -8,26 +8,36 @@ const EvaluationTable: React.FC<EvaluationTableProps> = ({ evaluations }) => {
   return (
     <div>
       <h2>Evaluation Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Semester 1</th>
-            <th>Semester 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(evaluations).map((category) => (
-            <tr key={category}>
-              <td>{category}</td>
-              <td>{evaluations[category as keyof EvaluationData][1].join(", ")}</td>
-              <td>{evaluations[category as keyof EvaluationData][2].join(", ")}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {Object.keys(evaluations).map((subject) => (
+        <div key={subject}>
+          <h3>{subject}</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Matérias</th>
+                <th>Semester 1</th>
+                <th>Semester 2</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>CP GS Challenge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(evaluations[subject]).map((category) => (
+                <tr key={category}>
+                  <td>{category}</td>
+                  <td>{evaluations[subject][category as keyof EvaluationData["Matemática"]][1].join(", ")}</td>
+                  <td>{evaluations[subject][category as keyof EvaluationData["Matemática"]][2].join(", ")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default EvaluationTable;
+
