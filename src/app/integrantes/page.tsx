@@ -1,32 +1,37 @@
 // integrantes/page.tsx
 import Card from '../../components/Card/Card';
+import intAna from '@/img/integrante-ana.png'
+import intGabi from '@/img/integrante-gabriela.png'
+import intLu from '@/img/integrante-luisa.png'
+import intMat from '@/img/integrante-mateus.png'
+import intMi from '@/img/integrante-michelle.png'
 
 const Integrantes = () => {
   const integrantesData = [
     { 
       name: 'Ana Carolina de Castro Gonçalves', 
-      rm:'rm: 554669', 
-      imageUrl: 'https://via.placeholder.com/130', 
+      rm:'RM: 554669', 
+      imageUrl:intAna, 
     },
     { 
       name:'Gabriela Gomes Cezar', 
-      rm:'rm: 556941', 
-      imageUrl: 'https://via.placeholder.com/130', 
+      rm:'RM: 556941', 
+      imageUrl:intGabi, 
     },
     { 
       name: 'Luisa Danielle', 
-      rm: 'rm: 555292', 
-      imageUrl: 'https://via.placeholder.com/130', 
+      rm: 'RM: 555292', 
+      imageUrl:intLu, 
     },
     { 
       name:'Mateus de Castro Nappe', 
-      rm:'rm: 556474', 
-      imageUrl: 'https://via.placeholder.com/130', 
+      rm:'RM: 556474', 
+      imageUrl:intMat, 
     },
     { 
       name:'Michelle Potenza', 
-      rm:'rm: 557702', 
-      imageUrl: 'https://via.placeholder.com/130', 
+      rm:'RM: 557702', 
+      imageUrl:intMi, 
     },
   ];
 
