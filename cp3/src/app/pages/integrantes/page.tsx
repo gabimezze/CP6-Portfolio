@@ -1,4 +1,4 @@
-import Card from '../../components/Card/Card';
+import Card from '../../../components/Card/Card';
 import intAna from '@/img/integrante-ana.png';
 import intGabi from '@/img/integrante-gabriela.png';
 import intLu from '@/img/integrante-luisa.png';
