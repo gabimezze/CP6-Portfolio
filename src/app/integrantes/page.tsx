@@ -1,70 +1,49 @@
 // integrantes/page.tsx
-import Card from '../../components/Card/card';
+import Card from '../../components/Card/Card';
 
 const Integrantes = () => {
-    const integrantesData = [
-      { 
-        name: 'Integrante 1', 
-        email: 'integrante1@example.com', 
-        imageUrl: 'https://via.placeholder.com/130', 
-        socialLinks: [
-          { url: 'https://facebook.com', iconUrl: 'https://via.placeholder.com/30?text=F' },
-          { url: 'https://twitter.com', iconUrl: 'https://via.placeholder.com/30?text=T' },
-        ]
-      },
-      { 
-        name: 'Integrante 2', 
-        email: 'integrante2@example.com', 
-        imageUrl: 'https://via.placeholder.com/130', 
-        socialLinks: [
-          { url: 'https://facebook.com', iconUrl: 'https://via.placeholder.com/30?text=F' },
-          { url: 'https://twitter.com', iconUrl: 'https://via.placeholder.com/30?text=T' },
-        ]
-      },
-      { 
-        name: 'Integrante 3', 
-        email: 'integrante3@example.com', 
-        imageUrl: 'https://via.placeholder.com/130', 
-        socialLinks: [
-          { url: 'https://facebook.com', iconUrl: 'https://via.placeholder.com/30?text=F' },
-          { url: 'https://twitter.com', iconUrl: 'https://via.placeholder.com/30?text=T' },
-        ]
-      },
-      { 
-        name: 'Integrante 4', 
-        email: 'integrante4@example.com', 
-        imageUrl: 'https://via.placeholder.com/130', 
-        socialLinks: [
-          { url: 'https://facebook.com', iconUrl: 'https://via.placeholder.com/30?text=F' },
-          { url: 'https://twitter.com', iconUrl: 'https://via.placeholder.com/30?text=T' },
-        ]
-      },
-      { 
-        name: 'Integrante 5', 
-        email: 'integrante5@example.com', 
-        imageUrl: 'https://via.placeholder.com/130', 
-        socialLinks: [
-          { url: 'https://facebook.com', iconUrl: 'https://via.placeholder.com/30?text=F' },
-          { url: 'https://twitter.com', iconUrl: 'https://via.placeholder.com/30?text=T' },
-        ]
-      },
-    ];
-  
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-100">
-        <div className="flex flex-wrap justify-center">
-          {integrantesData.map((integrante, index) => (
-            <Card 
-              key={index} 
-              name={integrante.name} 
-              email={integrante.email} 
-              imageUrl={integrante.imageUrl} 
-              socialLinks={integrante.socialLinks} 
-            />
-          ))}
-        </div>
+  const integrantesData = [
+    { 
+      name: 'Ana Carolina de Castro Gonçalves', 
+      rm:'rm: 554669', 
+      imageUrl: 'https://via.placeholder.com/130', 
+    },
+    { 
+      name:'Gabriela Gomes Cezar', 
+      rm:'rm: 556941', 
+      imageUrl: 'https://via.placeholder.com/130', 
+    },
+    { 
+      name: 'Luisa Danielle', 
+      rm: 'rm: 555292', 
+      imageUrl: 'https://via.placeholder.com/130', 
+    },
+    { 
+      name:'Mateus de Castro Nappe', 
+      rm:'rm: 556474', 
+      imageUrl: 'https://via.placeholder.com/130', 
+    },
+    { 
+      name:'Michelle Potenza', 
+      rm:'rm: 557702', 
+      imageUrl: 'https://via.placeholder.com/130', 
+    },
+  ];
+
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-#E30557FF">
+      <div className="flex flex-wrap justify-center">
+        {integrantesData.map((integrante, index) => (
+          <Card 
+            key={index} 
+            name={integrante.name} 
+            rm={integrante.rm} 
+            imageUrl={integrante.imageUrl} 
+          />
+        ))}
       </div>
-    );
-  };
-  
-  export default Integrantes;
+    </div>
+  );
+};
+
+export default Integrantes;
