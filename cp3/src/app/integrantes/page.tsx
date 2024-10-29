@@ -40,7 +40,7 @@ const Integrantes = () => {
   ];
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-#E30557FF">
+    <div className="flex justify-center mt-52 mb-0 h-96 bg-gray-#E30557FF">
       <div className="flex flex-wrap justify-center">
         {integrantesData.map((integrante, index) => (
           <Card 
