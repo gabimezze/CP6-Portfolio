@@ -8,6 +8,9 @@ interface Evaluation {
   cp1: number;
   cp2: number;
   cp3: number;
+  cp4: number;
+  cp5: number;
+  cp6: number;
   cs1: number;
   cs2: number;
   cs3: number;
@@ -18,8 +21,15 @@ interface Evaluation {
 }
 
 const initialData: Evaluation[] = [
-  { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+  { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+  { disciplina: "Computational Thinking Using Python", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+  { disciplina: "Domain Driven Design Using Java", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+  { disciplina: "Front-end Design Engeneering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+  { disciplina: "Software Engeneering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
+
+
+
   // Adicione os outros dados aqui
 ];
 
@@ -65,6 +75,9 @@ export default function Table() {
             <th className="border p-2">CP1</th>
             <th className="border p-2">CP2</th>
             <th className="border p-2">CP3</th>
+            <th className="border p-2">CP4</th>
+            <th className="border p-2">CP5</th>
+            <th className="border p-2">CP6</th>
             <th className="border p-2">CS1</th>
             <th className="border p-2">CS2</th>
             <th className="border p-2">CS3</th>

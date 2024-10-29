@@ -4,6 +4,9 @@ interface EvaluationRowProps {
       cp1: number;
       cp2: number;
       cp3: number;
+      cp4: number;
+      cp5: number;
+      cp6: number;
       cs1: number;
       cs2: number;
       cs3: number;
@@ -23,6 +26,9 @@ interface EvaluationRowProps {
         <td className="border p-2">{evaluation.cp1}</td>
         <td className="border p-2">{evaluation.cp2}</td>
         <td className="border p-2">{evaluation.cp3}</td>
+        <td className="border p-2">{evaluation.cp4}</td>
+        <td className="border p-2">{evaluation.cp5}</td>
+        <td className="border p-2">{evaluation.cp6}</td>
         <td className="border p-2">{evaluation.cs1}</td>
         <td className="border p-2">{evaluation.cs2}</td>
         <td className="border p-2">{evaluation.cs3}</td>

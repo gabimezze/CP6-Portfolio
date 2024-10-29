@@ -6,6 +6,9 @@ interface FormModalProps {
     cp1: number;
     cp2: number;
     cp3: number;
+    cp4: number;
+    cp5: number;
+    cp6: number;
     cs1: number;
     cs2: number;
     cs3: number;
@@ -24,6 +27,9 @@ export default function FormModal({ evaluation, onClose, onSubmit }: FormModalPr
     cp1: 0,
     cp2: 0,
     cp3: 0,
+    cp4: 0,
+    cp5: 0,
+    cp6: 0,
     cs1: 0,
     cs2: 0,
     cs3: 0,
@@ -58,7 +64,7 @@ export default function FormModal({ evaluation, onClose, onSubmit }: FormModalPr
             className="border p-2 w-full"
           />
         </div>
-        {['cp1', 'cp2', 'cp3','cs1','cs2','cs3','cs4', 'gs', 'fa', 'md'].map(field => (
+        {['cp1', 'cp2', 'cp3','cp4','cp5','cp6','cs1','cs2','cs3','cs4', 'gs', 'fa', 'md'].map(field => (
           <div key={field} className="mb-4">
             <label>{field.toUpperCase()}</label>
             <input
