@@ -1,8 +1,7 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import EvaluationRow from '../EvaluationRow/EvaluationRow';
 import FormModal from '../FormModal/FormModal';
-
 
 
 interface Evaluation {
@@ -30,30 +29,13 @@ const initialData: Evaluation[] = [
   { disciplina: "Front-end Design Engeneering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
   { disciplina: "Software Engeneering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
 
-
-
-  // Adicione os outros dados aqui
 ];
 
 export default function Table() {
   const [evaluations, setEvaluations] = useState<Evaluation[]>(initialData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEvaluation, setCurrentEvaluation] = useState<Evaluation | null>(null);
-
-  // Carregar os dados do localStorage na primeira renderização
-  useEffect(() => {
-    const savedData = localStorage.getItem('evaluations');
-    if (savedData) {
-      setEvaluations(JSON.parse(savedData));
-    } else {
-      setEvaluations(initialData);
-    }
-  }, []);
-
-  // Função para salvar os dados no localStorage sempre que evaluations mudar
-  useEffect(() => {
-    localStorage.setItem('evaluations', JSON.stringify(evaluations));
-  }, [evaluations]); 
+ 
 
   const handleAdd = () => {
     setCurrentEvaluation(null); // Para adicionar uma nova avaliação

@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         'my-gradient': {
-                    '50': '#FF1493',
+                    '50': '#ec135a',
                     '100': '#1C1C1C',
         },
       },

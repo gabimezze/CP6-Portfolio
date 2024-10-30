@@ -4,7 +4,7 @@
 
 @layer components {
     .cabecalho li {
-        @apply  mr-0 m-5 inline list-none;
+        @apply  mr-0 m-5 inline list-none font-medium;
     }
     .cabecalho li:hover {
         @apply bg-black p-4 bg-opacity-10;

@@ -15,7 +15,7 @@ const Card = ({ name, rm, imageUrl, link }: CardProps) => {
 
   return (
     <Link href={link}>
-      <div className="w-[200px] h-[100px] bg-[#f308b0] border border-gray-#000000 rounded-lg p-5 shadow-md m-5 cursor-pointer"> {/* Adicionando cursor-pointer para indicar que é clicável */}
+      <div className="w-[200px] h-[100px] bg-[#ec135a] border border-gray-#000000 rounded-lg p-5 shadow-md m-5 cursor-pointer"> {/* Adicionando cursor-pointer para indicar que é clicável */}
         <div className="flex justify-center mb-5">
           <img src={imageSrc} alt={name} className="w-[130px] h-[130px] rounded-full" />
         </div>
