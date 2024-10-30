@@ -1,8 +1,7 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import EvaluationRow from '../EvaluationRow/EvaluationRow';
 import FormModal from '../FormModal/FormModal';
-
 
 interface Evaluation {
   disciplina: string;
@@ -22,20 +21,28 @@ interface Evaluation {
 }
 
 const initialData: Evaluation[] = [
-  { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
-  { disciplina: "Computational Thinking Using Python", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
-  { disciplina: "Domain Driven Design Using Java", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
-  { disciplina: "Front-end Design Engeneering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
-  { disciplina: "Software Engeneering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5:0, cp6:0, cs1: 10, cs2: 10, cs3: 10,cs4: 8, gs: 0, fa: 4, md: 0},
-
+  { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Computational Thinking Using Python", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Domain Driven Design Using Java", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Front-end Design Engineering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+  { disciplina: "Software Engineering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
 ];
 
 export default function Table() {
   const [evaluations, setEvaluations] = useState<Evaluation[]>(initialData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEvaluation, setCurrentEvaluation] = useState<Evaluation | null>(null);
- 
+
+  useEffect(() => {
+    const fetchEvaluations = async () => {
+      const response = await fetch('/api');
+      const data = await response.json();
+      setEvaluations(data);
+    };
+
+    fetchEvaluations();
+  }, []);
 
   const handleAdd = () => {
     setCurrentEvaluation(null); // Para adicionar uma nova avaliação
@@ -47,17 +54,49 @@ export default function Table() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (discipline: string) => {
-    setEvaluations(evaluations.filter(e => e.disciplina !== discipline));
+  const handleDelete = async (discipline: string) => {
+    const updatedEvaluations = evaluations.filter(e => e.disciplina !== discipline);
+    setEvaluations(updatedEvaluations);
+
+    // Chamar a API para deletar a avaliação
+    await fetch('/api', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ disciplina: discipline }),
+    });
   };
 
-  const handleSubmit = (newEvaluation: Evaluation) => {
+  const handleSubmit = async (newEvaluation: Evaluation) => {
     if (currentEvaluation) {
       // Editar existente
-      setEvaluations(evaluations.map(e => e.disciplina === currentEvaluation.disciplina ? newEvaluation : e));
+      const updatedEvaluations = evaluations.map(e => 
+        e.disciplina === currentEvaluation.disciplina ? newEvaluation : e
+      );
+      setEvaluations(updatedEvaluations);
+
+      // Chamar a API para atualizar a avaliação
+      await fetch('/api', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEvaluation),
+      });
     } else {
       // Adicionar nova
-      setEvaluations([...evaluations, newEvaluation]);
+      const updatedEvaluations = [...evaluations, newEvaluation];
+      setEvaluations(updatedEvaluations);
+
+      // Chamar a API para adicionar a nova avaliação
+      await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEvaluation),
+      });
     }
     setIsModalOpen(false);
   };
