@@ -5,7 +5,7 @@ export default function Menu() {
         <nav>
             <ul>
                 <li><Link href="/">Home</Link></li>
-                <li><Link href="/integrantes">Integrantes</Link></li>
+                <li><Link href="/pages/integrantes">Integrantes</Link></li>
             </ul>
         </nav>
     )
