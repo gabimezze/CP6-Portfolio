@@ -20,37 +20,55 @@ interface Evaluation {
   md: number;
 }
 
-const initialData: Evaluation[] = [
-  { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Computational Thinking Using Python", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Domain Driven Design Using Java", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Front-end Design Engineering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-  { disciplina: "Software Engineering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
-];
+interface TableProps {
+  integrante: string;
+}
 
-export default function Table() {
+ const initialData: Evaluation[] = [
+   { disciplina: "Artificial Intelligence & Chatbot", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+   { disciplina: "Building Relational Database", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+   { disciplina: "Computational Thinking Using Python", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+   { disciplina: "Domain Driven Design Using Java", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+   { disciplina: "Front-end Design Engineering", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+   { disciplina: "Software Engineering and Business Model", cp1: 82.5, cp2: 60, cp3: 69, cp4: 0, cp5: 0, cp6: 0, cs1: 10, cs2: 10, cs3: 10, cs4: 8, gs: 0, fa: 4, md: 0 },
+ ];
+
+export default function Table({ integrante }: TableProps) {
   const [evaluations, setEvaluations] = useState<Evaluation[]>(initialData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentEvaluation, setCurrentEvaluation] = useState<Evaluation | null>(null);
 
   useEffect(() => {
     const fetchEvaluations = async () => {
-      const response = await fetch('/api');
-      const data = await response.json();
-      setEvaluations(data);
+      try {
+        const response = await fetch(`/api/${integrante}`);
+        if (response.ok) {
+          const data = await response.json();
+          setEvaluations(data);
+        } else {
+          console.error(`Erro ao buscar dados: Status ${response.status}`);
+          setEvaluations([]); 
+        }
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error(`Erro na requisição: ${error.message}`);
+        } else {
+          console.error('Erro inesperado na requisição.');
+        }
+        setEvaluations([]);
+      }
     };
-
+  
     fetchEvaluations();
-  }, []);
+  }, [integrante]);
 
   const handleAdd = () => {
-    setCurrentEvaluation(null); // Para adicionar uma nova avaliação
+    setCurrentEvaluation(null);
     setIsModalOpen(true);
   };
 
   const handleEdit = (evaluation: Evaluation) => {
-    setCurrentEvaluation(evaluation); // Para editar uma avaliação existente
+    setCurrentEvaluation(evaluation);
     setIsModalOpen(true);
   };
 
@@ -58,8 +76,7 @@ export default function Table() {
     const updatedEvaluations = evaluations.filter(e => e.disciplina !== discipline);
     setEvaluations(updatedEvaluations);
 
-    // Chamar a API para deletar a avaliação
-    await fetch('/api', {
+    await fetch(`/api/${integrante}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -70,14 +87,12 @@ export default function Table() {
 
   const handleSubmit = async (newEvaluation: Evaluation) => {
     if (currentEvaluation) {
-      // Editar existente
-      const updatedEvaluations = evaluations.map(e => 
+      const updatedEvaluations = evaluations.map(e =>
         e.disciplina === currentEvaluation.disciplina ? newEvaluation : e
       );
       setEvaluations(updatedEvaluations);
 
-      // Chamar a API para atualizar a avaliação
-      await fetch('/api', {
+      await fetch(`/api/${integrante}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -85,12 +100,10 @@ export default function Table() {
         body: JSON.stringify(newEvaluation),
       });
     } else {
-      // Adicionar nova
       const updatedEvaluations = [...evaluations, newEvaluation];
       setEvaluations(updatedEvaluations);
 
-      // Chamar a API para adicionar a nova avaliação
-      await fetch('/api', {
+      await fetch(`/api/${integrante}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +117,7 @@ export default function Table() {
   return (
     <div className="container mx-auto p-4 ">
       <button onClick={handleAdd} className="mb-4 bg-pink-700 text-white p-2 rounded">
-        Adicionar Avaliação
+        Adicionar Disciplina
       </button>
       <table className="table-auto w-full border-collapse">
         <thead>
