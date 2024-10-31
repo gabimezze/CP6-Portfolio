@@ -3,6 +3,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { NextApiRequest } from "next";
 
 interface Evaluation {
   disciplina: string;
@@ -21,7 +22,7 @@ interface Evaluation {
   md: number;
 }
 
-export async function GET(request: Request, { params }: { params: { integrantes: string } }) {
+export async function GET(req: NextApiRequest, { params }: { params: { integrantes: string } }) {
   const { integrantes } = params; 
   
   if (!integrantes) {
