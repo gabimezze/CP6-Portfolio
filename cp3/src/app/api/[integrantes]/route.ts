@@ -19,7 +19,7 @@ interface Evaluation {
   gs: number;
   fa: number;
   md: number;
-};
+}
 
 // Rota GET
 export async function GET(req: NextRequest, context: { params: { integrantes: string } }) {
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest, context: { params: { integrantes: st
       { error: 'Integrante não especificado.' },
       { status: 400 }
     );
-  };
+  }
 
   const filePath = path.join(process.cwd(), `src/data/${integrantes}.json`);
 
@@ -43,8 +43,8 @@ export async function GET(req: NextRequest, context: { params: { integrantes: st
       { error: `Falha ao obter dados para ${integrantes}: ${error}` },
       { status: 500 }
     );
-  };
-};
+  }
+}
 
 // Rota POST
 export async function POST(req: NextRequest, context: { params: { integrantes: string } }) {
@@ -63,8 +63,8 @@ export async function POST(req: NextRequest, context: { params: { integrantes: s
       { error: `Falha ao adicionar dados para ${integrantes}: ${error}` },
       { status: 500 }
     );
-  };
-};
+  }
+}
 
 // Rota PUT
 export async function PUT(req: NextRequest, context: { params: { integrantes: string } }) {
@@ -86,14 +86,14 @@ export async function PUT(req: NextRequest, context: { params: { integrantes: st
         { error: `Disciplina não encontrada: ${updatedEvaluation.disciplina}` },
         { status: 404 }
       );
-    };
+    }
   } catch (error) {
     return NextResponse.json(
       { error: `Falha ao atualizar dados para ${integrantes}: ${error}` },
       { status: 500 }
     );
-  };
-};
+  }
+}
 
 // Rota DELETE
 export async function DELETE(req: NextRequest, context: { params: { integrantes: string } }) {
@@ -111,7 +111,7 @@ export async function DELETE(req: NextRequest, context: { params: { integrantes:
         { error: `Disciplina não encontrada: ${disciplina}` },
         { status: 404 }
       );
-    };
+    }
 
     await fs.writeFile(filePath, JSON.stringify(updatedEvaluations, null, 2));
     return NextResponse.json({ message: `Disciplina ${disciplina} removida com sucesso.` });
@@ -120,5 +120,5 @@ export async function DELETE(req: NextRequest, context: { params: { integrantes:
       { error: `Falha ao remover dados para ${integrantes}: ${error}` },
       { status: 500 }
     );
-  };
-};
+  }
+}
