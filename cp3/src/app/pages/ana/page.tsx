@@ -9,4 +9,4 @@ export default function Boletim() {
       <Table integrante={integrante}/> 
     </div>
   );
-}
+};

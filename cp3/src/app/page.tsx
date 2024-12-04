@@ -6,4 +6,4 @@ export default function Home() {
       <h2 className="font-light text-3xl">Seja Bem-vindo ao portfólio acadêmico.</h2>
     </div>
   );
-}
+};
