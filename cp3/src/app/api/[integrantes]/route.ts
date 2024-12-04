@@ -22,17 +22,20 @@ interface Evaluation {
 }
 
 // Rota GET
-export async function GET(req: NextRequest, context: { params: { integrantes: string } }) {
-  const { integrantes } = context.params;
+type RouteParams = { integrantes: string };
+type MyRouteContext = { params: RouteParams };
 
-  if (!integrantes) {
+export default async function handler(context: MyRouteContext) {
+  const { params } = context;
+
+  if (!params.integrantes) {
     return NextResponse.json(
       { error: 'Integrante não especificado.' },
       { status: 400 }
     );
   }
 
-  const filePath = path.join(process.cwd(), `src/data/${integrantes}.json`);
+  const filePath = path.join(process.cwd(), `src/data/${params.integrantes}.json`);
 
   try {
     const file = await fs.readFile(filePath, 'utf-8');
@@ -40,7 +43,7 @@ export async function GET(req: NextRequest, context: { params: { integrantes: st
     return NextResponse.json(evaluations);
   } catch (error) {
     return NextResponse.json(
-      { error: `Falha ao obter dados para ${integrantes}: ${error}` },
+      { error: `Falha ao obter dados para ${params.integrantes}: ${error}` },
       { status: 500 }
     );
   }
