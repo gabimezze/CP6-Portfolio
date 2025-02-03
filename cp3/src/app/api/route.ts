@@ -20,7 +20,7 @@ interface Evaluation {
 
 const filePath = process.cwd() + '/src/data/banco.json'; 
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<Evaluation[]> | NextResponse<{ error: string; }>> {
   try {
     // Lê o arquivo JSON
     const file = await fs.readFile(filePath, 'utf-8');
